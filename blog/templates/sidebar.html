@@ -3,8 +3,8 @@
 	<ul>
 		<li>
 		<h2>{% trans "About Me" %}</h2>
-		<a href="{% url rss_feed "latest" %}"  title="Latest Post RSS Feed"><img src="/static/img/rss.png"/></a>
-		<a href="http://twitter.com/alex_nuaa"  title="Follow me on Twitter"><img src="/static/img/twitter.png"/></a>
+		<a href="{% url rss_feed "latest" %}"  title="Latest Post RSS Feed" onClick="javascript:pageTracker._trackPageview('RSS');"><img src="/static/img/rss.png"/></a>
+		<a href="http://twitter.com/alex_nuaa"  title="Follow me on Twitter" onClick="javascript:pageTracker._trackPageview('twitter');"><img src="/static/img/twitter.png"/></a>
 		</li>
 		<li>
 		<h2>{% trans "Recent Posts" %}</h2>
