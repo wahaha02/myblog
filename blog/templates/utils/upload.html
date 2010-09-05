@@ -1,0 +1,35 @@
+{% load media %}
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+	<title>{#pulog_upload_dlg.title}</title>
+	<script type="text/javascript" src="/static/tiny_mce/tiny_mce_popup.js"></script>
+	<script type="text/javascript" src="/static/tiny_mce/plugins/pulog_upload/js/dialog.js"></script>
+</head>
+<body>
+
+{% get_media as images %}
+
+<h1 id="title">Upload your files</h1>
+<hr>
+<form enctype="multipart/form-data" method="POST" action="/upload/">
+	{{ form.as_p }}
+	<input type="submit" value="upload"/>
+	<!--<input type="button" id="insert" name="insert" value="{#insert}" onclick="UploadDialog({{ image.image.url }}).insert();" />-->
+</form> 
+
+<div>
+{% for image in images %}
+<div>
+    <div>
+        <a href="{{image.get_thumb_url}}"><img src="{{ image.get_thumb_url }}" title="{{ image.title }}" /></a><br />
+    </div>
+    <div>
+	    <input type="button" id="insert" name="insert" value="{#insert}" onclick="UploadDialog.insert('{{image.get_thumb_url}}', '{{ image.title}}', '{{ image.get_thumb_url }}');" />
+    </div>
+</div>
+{% endfor %}
+</div>
+
+</body>
+</html>

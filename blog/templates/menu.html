@@ -1,0 +1,19 @@
+{% load i18n %}
+
+<ul>
+{% if current %}
+	<li class="page_item"><a href="/" title="Home">{% trans "Home" %}</a></li>
+{% else %}
+    <li class="current_page_item"><a href="/" title="Home">{% trans "Home" %}</a></li>
+{% endif %}
+
+{% for menu_item in menus %}
+    {% ifequal current menu_item.slug %}
+	   <li class="current_page_item"><a href="/{{ menu_item.slug }}/" title="Home">{{ menu_item.title }}</a></li>
+	{% else %}
+	   <li class="page_item"><a href="/{{ menu_item.slug }}/" title="Home">{{ menu_item.title }}</a></li>
+	{% endifequal %}
+{% endfor %}
+
+<li id="pattern"></li>
+</ul>

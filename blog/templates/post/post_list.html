@@ -1,0 +1,56 @@
+{% extends "base.html" %}
+{% load i18n pagination %}
+{% load tag %}
+{% load highlight %}
+{% load rabidratings_extras %}
+{% load strings %}
+
+{% block title %} {% webtitle %} {% endblock %}
+
+{% block content %}
+    {% if category %}
+        <div class="boxcaption"><h3>ACHIVES</h3></div>
+        <div class="box">&#8216;{{ category.title }}&#8217; Category</div>
+    {% else %}{% if year %}
+        <div class="boxcaption"><h3>ACHIVES</h3></div>
+        <div class="box">{{ year }}-{{ month }} Achives</div>
+    {% else %}{% if query %}
+        <div class="boxcaption"><h3>ACHIVES</h3></div>
+        <div class="box">Keywords: &#8216;{{ query }}&#8217; </div>
+    {% endif %}{% endif %}{% endif %}
+    
+	{% if posts %}
+		{% pre_pagination posts page %}
+
+		{% for post in posts %}
+    		<div class="post" id="post-{{ post.id }}">
+    			{% include "post/title.html" %}
+    		
+    		<div class="clear"></div>
+    		<div class="entry">
+    			{% autoescape off %}
+    			{{ post.excerpt|highlight_format }} {% if post.pagebreak %}<a href="{{ post.get_absolute_url }}#more-{{ post.id }}">Read More...</a>{% endif %}
+    			{% endautoescape %}
+    		</div>
+    		
+    		<div class="under">  
+            <span class="categories"> 
+                {% for category in post.get_categories %}
+                    {% if forloop.last %}
+                        <a href="{{ category.get_absolute_url }}">{{ category.title }}</a> 
+                    {% else %}
+                        <a href="{{ category.get_absolute_url }}">{{ category.title }}</a>, 
+                    {% endif %}
+                {% endfor %}
+            </span>
+            <span class="tags">{% show_tags_for_post post %}</span>
+            </div>
+            
+    		</div>
+		{% endfor %}
+		{% do_pagination %}
+	{% else %}
+		No artile yet!
+	{% endif %}
+{% endblock %}
+

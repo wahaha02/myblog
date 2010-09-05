@@ -1,0 +1,5 @@
+{% load highlight %}
+
+{% autoescape off %}
+{{ obj.content|highlight_format }}
+{% endautoescape %}

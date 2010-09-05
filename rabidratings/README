@@ -1,0 +1,35 @@
+
+django-rabid-ratings?
+
+A port of Michelle Steigerwalt's rabid ratings star rating ajax component to be 
+plugged into a django project as a django app.
+
+Uses mootools-1.2.0-core instead of 1.2dev
+
+An example can be viewed at http://factory-h.com/ratingstest/
+Downloading?
+
+The best way to obtain this project is to get it from subversion:
+
+svn checkout http://django-rabid-ratings.googlecode.com/svn/trunk/rabidratings rabidratings 
+
+Using?
+
+Follow the instructions in README.txt to install. After installing, there are 
+three steps to using the ratings component:
+
+1. Import the template tags:
+
+{% load rabidratings_extras %}
+
+2. Add the required css and js files with this tag in your
+
+<head>
+
+section
+
+{% rating_header %}
+
+3. Add the rating component, the first argument is a 'key' to uniquely identify the item you are rating.
+
+{% show_rating '1234' %}

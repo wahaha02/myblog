@@ -1,0 +1,7 @@
+{% if categories %}
+<ul>
+	{% for category in categories %}
+    <li><a href="{{ category.get_absolute_url }}">{{ category.title }}</a> ({{ category.get_post_count }})</li>
+	{% endfor %}
+</ul>
+{% endif %}

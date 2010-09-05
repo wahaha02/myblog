@@ -1,0 +1,7 @@
+{% if comments %}
+<ul>
+	{% for comment in comments %}
+	<li><a href="{{ comment.get_absolute_url }}">{{ comment.user_name }}</a>:  {{ comment.content }}</li>
+	{% endfor %}
+</ul>
+{% endif %}

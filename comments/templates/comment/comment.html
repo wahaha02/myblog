@@ -1,0 +1,45 @@
+{% load i18n filter count comment %}
+{% get_comment_form for object as commentform %}
+
+<h3 id="comments">{{ object.get_comments_count }} Comments</h3>
+
+{% get_threaded_comment_list for object %}
+
+<script type="text/javascript" src="/static/js/comment-reply.js"></script>
+
+<div id="respond">
+<h3>{% trans "Leave a Comment" %}</h3>
+<div class="cancel-comment-reply">
+<small><a rel="nofollow" id="cancel-comment-reply-link" href="{{ comment.get_absolute_url }}#respond" style="display:none;">Click here to cancel reply.</a></small>
+</div>
+<form style="display: block;" action="/comment/post/" method="POST" id="commentform">
+    {% if not user.is_authenticated %}
+        <p>{{ commentform.name }}
+        <label for="author"><small>{% trans "Name (required)" %}</small></label></p>
+        <div id="result"></div>
+
+        <p>{{ commentform.email }}
+        <label for="email"><small>{% trans "Mail (will not be published) (required)" %}</small></label></p>
+
+
+        <p>{{ commentform.url }}
+        <label for="url"><small>{% trans "Website" %}</small></label></p>
+
+    {% else %}
+    <p>Logged in as {{ user.username }}. <a href="/admin/logout/" title="Log out of this account">{% trans "Logout" %} &raquo;</a></p>
+
+    {% endif %}
+
+    <p>
+    {{ commentform.content }}
+    {{ commentform.content_type }}
+    {{ commentform.object_pk }}
+    {{ commentform.timestamp }}
+    {{ commentform.security_hash }}
+    {{ commentform.parent_id }}
+    </p>
+
+    <p><input name="submit" type="image" src="/static/theme/images/submit.png" id="submit" value="Submit Comment" />
+    <input type="hidden" name="object_id" value="{{ object.id }}" /></p>
+</form>
+</div>

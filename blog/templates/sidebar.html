@@ -1,0 +1,60 @@
+{% load sidebar i18n %}
+<div id="sidebar">
+	<ul>
+		<li>
+		<h2>{% trans "About Me" %}</h2>
+		<a href="{% url rss_feed "latest" %}"  title="Latest Post RSS Feed"><img src="/static/img/rss.png"/></a>
+		<a href="http://twitter.com/alex_nuaa"  title="Follow me on Twitter"><img src="/static/img/twitter.png"/></a>
+		</li>
+		<li>
+		<h2>{% trans "Recent Posts" %}</h2>
+		{% get_recent_posts %}
+		</li>
+
+		<li>
+		<h2>{% trans "Recent Comments" %}</h2>
+		{% get_recent_comments %}
+		</li>
+        
+        <li>
+        <h2>{% trans "Tags Cloud" %}</h2>
+        {% include "sidebar/tags_cloud.html" %}
+        </li>
+        
+		<!--
+		<li>
+		<h2>{% trans "Recent Pingbacks" %}</h2>
+		{% get_recent_pingbacks %}
+		</li>
+		-->
+
+		<li>
+		<h2>{% trans "Links" %}</h2>
+		{% get_links %}
+		</li>
+
+		<li>
+		<h2>Categories</h2>
+		{% get_categories %}
+		</li>
+		
+		<li>
+		<h2>Archive</h2>
+		{% get_archive %}
+		</li>
+
+		<li>
+		<h2>Meta</h2>
+			<ul>
+				{% if user.is_staff %}
+				<li><a href="/admin/">Admin</a></li>
+				{% else %}
+				<li><a href="/admin/">Login</a></li>
+				{% endif %}
+				{% if user.is_authenticated %}
+				<li><a href="/admin/logout/">Logout</a></li>
+				{% endif %}
+			</ul>
+		</li>
+	</ul>
+</div>

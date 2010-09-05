@@ -1,0 +1,11 @@
+{% load tagging_tags %}
+{% tags_for_object obj as tags %}
+{% if tags %}
+    {% for tag in tags %}
+        {% if forloop.last %}
+            <a href="{% url single_tag tag %}">{{ tag }}</a>
+        {% else %}
+            <a href="{% url single_tag tag %}">{{ tag }}</a>,
+        {% endif %}
+    {% endfor %}        
+{% endif %}

@@ -1,0 +1,81 @@
+D:\6910P\svn\Django\myblog\myblog>createdb -U postgres wahaha02_db02
+CREATE DATABASE
+
+D:\6910P\svn\Django\myblog\myblog>ls
+'ls' is not recognized as an internal or external command,
+operable program or batch file.
+
+D:\6910P\svn\Django\myblog\myblog>manage.py syncdb
+Syncing...
+Creating table auth_permission
+Creating table auth_group
+Creating table auth_user
+Creating table auth_message
+Creating table django_admin_log
+Creating table django_content_type
+Creating table django_session
+Creating table django_site
+Creating table south_migrationhistory
+
+You just installed Django's auth system, which means you don't have any superusers defined.
+Would you like to create one now? (yes/no): yes
+Username: postgres
+E-mail address: bin.c.chen@gmail.com
+Password:
+Password (again):
+Error: Your passwords didn't match.
+Password:
+Password (again):
+Superuser created successfully.
+Installing index for auth.Permission model
+Installing index for auth.Message model
+Installing index for admin.LogEntry model
+
+Synced:
+ > django.contrib.auth
+ > django.contrib.admin
+ > django.contrib.contenttypes
+ > django.contrib.sessions
+ > django.contrib.sites
+ > myblog.pagination
+ > south
+
+Not synced (use migrations):
+ - myblog.blog
+ - myblog.tagging
+ - myblog.comments
+ - myblog.pingback
+ - myblog.rabidratings
+(use ./manage.py migrate to migrate these)
+
+D:\6910P\svn\Django\myblog\myblog>manage.py migrate
+Running migrations for blog:
+ - Migrating forwards to 0002_rating.
+ > blog: 0001_initial
+ > blog: 0002_rating
+ - Loading initial data for blog.
+Running migrations for tagging:
+ - Migrating forwards to 0001_initial.
+ > tagging: 0001_initial
+ - Loading initial data for tagging.
+Running migrations for comments:
+ - Migrating forwards to 0001_initial.
+ > comments: 0001_initial
+ - Loading initial data for comments.
+Running migrations for pingback:
+ - Migrating forwards to 0001_initial.
+ > pingback: 0001_initial
+ - Loading initial data for pingback.
+Running migrations for rabidratings:
+ - Migrating forwards to 0001_initial.
+ > rabidratings: 0001_initial
+ - Loading initial data for rabidratings.
+
+D:\6910P\svn\Django\myblog\myblog>manage.py runserver
+Validating models...
+0 errors found
+
+Django version 1.1.1, using settings 'myblog.settings'
+Development server is running at http://127.0.0.1:8000/
+Quit the server with CTRL-BREAK.
+

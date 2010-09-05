@@ -1,0 +1,31 @@
+{% extends "base.html" %}
+{% load i18n pagination %}
+{% load strings %}
+
+
+{% block title %} {{ tag.name }} | {% webtitle %} {% endblock %}
+
+{% block content %}
+	<h2 class="pagetitle">Items for {{ tag.name }}</h2>
+
+	{% if posts %}
+		{% pre_pagination posts page %}
+		{% for post in posts %}
+		<div class="post" id="post-{{ post.id }}">
+		{% include "post/title.html" %}
+		
+		<div class="clear"></div>
+		<div class="entry">
+			{% autoescape off %}
+			{{ post.get_excerpt }} {% if post.get_pagebreak %}<a href="{{ post.get_absolute_url }}#more">Read More...</a>{% endif %}
+			{% endautoescape %}
+		</div>
+		</div>
+		{% endfor %}
+		{% do_pagination %}
+	{% else %}
+		<div class="entry">
+			没有任何文档
+		</div>
+	{% endif %}
+{% endblock %}

@@ -1,0 +1,20 @@
+{% load filter i18n count %}
+<ul class="date">
+	<li class="day">{{ post.date.day }}</li>
+	<li class="month">{{ post.date|date:"M" }}</li>
+</ul>
+
+<ul class="title">	
+	<li class="topic"><a href="{{ post.get_absolute_url }}" rel="bookmark" title="Permanent Link to {{ post.title }}">{{ post.title }}</a></li>
+    <li class="postmeta"> 
+        <span class="date">{{ post.date|date:"m/d/Y h:i A" }}</span>
+        <span class="author">{{ post.get_author }}</span>
+        <ul class="alignright">
+            {% if user.is_staff %} 
+                <span class="views"><a href="{{ post.get_admin_url }}">{% trans "Edit" %}</a></span>
+            {% endif %}
+            <span class="views">{% get_views_count %}</span>
+            <span class="views"><a href="{{ post.get_absolute_url}}#comments">{{ post.get_comments_count }} Comments </a></span>
+        </ul> 
+    </li> 
+</ul>

@@ -1,0 +1,27 @@
+{% extends "base.html" %}
+{% load i18n pagination %}
+{% load strings %}
+
+{% block title %} {% webtitle %} {% endblock %}
+
+{% block content %}
+	{% if comments %}
+		{% pre_pagination comments page 20 %}
+		{% for comment in comments %}
+		<div class="comment" id="comment-{{ comment.id }}">
+            <h2><a href="{{ comment.get_absolute_url }}" rel="bookmark" title="Permanent Link to {{ comment.title }}">{{ comment.user_name }} @  《{{ comment.get_content_object_title }}》Said </a></h2>
+
+		
+		<div class="clear"></div>
+		<div class="entry">
+			{% autoescape off %}
+			{{ comment.content|linebreaks }}
+			{% endautoescape %}
+		</div>
+		</div>
+		{% endfor %}
+		{% do_pagination %}
+	{% else %}
+		No artile yet!
+	{% endif %}
+{% endblock %}

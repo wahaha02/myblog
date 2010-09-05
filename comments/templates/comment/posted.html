@@ -1,0 +1,9 @@
+{% extends "comment/base.html" %}
+
+{% block title %}Thanks for commenting.{% endblock %}
+
+{% block content %}
+  <h1>Thank you for your comment.</h1>
+  <a href="{{ object.get_absolute_url }}">returning to the discussion</a>
+
+{% endblock %}

@@ -1,0 +1,37 @@
+{% extends "base.html" %}
+{% load i18n utils %}
+{% load highlight %}
+{% load strings %}
+
+{% block title %} {{ post.title }} | {% webtitle %} {% endblock %}
+
+{% block content %}
+<div class="post" id="post-{{ post.id }}">
+	<h2 class="pagetitle">{{ post.title }}</h2>
+	<div class="entry">
+		{% autoescape off %}
+		{{ post.content|highlight_format }}
+		{% endautoescape %}
+	</div>
+</div>
+
+{% if user.is_staff %}
+    <p><small><a href="{{ post.get_admin_url }}">Edit</a></small></p>
+{% endif %}
+
+<div id="comments">
+    <p class="meta"> 
+    {% if post.allow_comment %}
+        <small> &raquo; <a href="#comments">{% trans "You can leave a comment." %}</a></small>
+    {% endif %}
+    </p> 
+    {% var object = post %}
+    {% include "pingback/pingback.html" %}
+    {% if post.allow_comment %}
+        {% include "comment/comment.html" %}
+    {% else %}
+        <p class="nocomments">Comments are closed.</p>
+    {% endif %}
+</div>
+
+{% endblock %}

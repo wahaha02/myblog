@@ -1,0 +1,7 @@
+{% if links %}
+<ul>
+	{% for link in links %}
+    <li><a href="{{ link.url }}" title="{{ link.description }}">{{ link.name }}</a></li>
+	{% endfor %}
+</ul>
+{% endif %}

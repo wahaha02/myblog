@@ -1,0 +1,7 @@
+{% if months %}
+<ul>
+	{% for month in months reversed %}
+	<li><a href="/archives/{{ month|date:"Y/m/" }}">{{ month|date:"F Y" }}</a></li>
+	{% endfor %}
+</ul>
+{% endif %}

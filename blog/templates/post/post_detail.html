@@ -1,0 +1,61 @@
+{% extends "base.html" %}
+{% load i18n utils %}
+{% load tag %}
+{% load highlight %}
+{% load rabidratings_extras %}
+{% load strings %}
+
+{% block title %} {{ post.title }} | {% webtitle %} {% endblock %}
+
+{% block content %}
+    <div id="content">
+	<div class="post" id="post-{{ post.id }}">
+	{% include "post/title.html" %}
+	
+	<div class="clear"></div>
+	<div class="entry">
+		{% autoescape off %}
+		{% if post.pagebreak %}
+			{{ post.excerpt|highlight_format }}
+            <p><span id="more-{{ post.id }}"></span></p>
+			{{ post.remain|highlight_format }} 
+		{% else %}
+			{{ post.content|highlight_format }} 
+		{% endif %}
+		{% endautoescape %}
+	</div>
+    
+    </div>
+    </div>
+    
+    <div class="under">  
+    <span class="categories"> 
+        {% for category in post.get_categories %}
+            {% if forloop.last %}
+                <a href="{{ category.get_absolute_url }}">{{ category.title }}</a> 
+            {% else %}
+                <a href="{{ category.get_absolute_url }}">{{ category.title }}</a>, 
+            {% endif %}
+        {% endfor %}
+    </span>
+    <span class="tags">{% show_tags_for_post post %}</span>
+    </div>
+    
+    <div id="ratings">{% show_rating post.id %}</div>
+    
+    <div id="comments">
+        <p class="meta"> 
+        {% if post.allow_comment %}
+            <small> &raquo; <a href="#comments">{% trans "You can leave a comment." %}</a></small>
+        {% endif %}
+        </p> 
+        {% var object = post %}
+        {% include "pingback/pingback.html" %}
+        {% if post.allow_comment %}
+            {% include "comment/comment.html" %}
+        {% else %}
+            <p class="nocomments">Comments are closed.</p>
+        {% endif %}
+    </div>
+    
+{% endblock %}
